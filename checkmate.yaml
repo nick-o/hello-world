@@ -1,0 +1,44 @@
+blueprint:
+  id: "b8449c4605574e309e1c5ed35c35c49d"
+  name: "Hello World"
+  description: "Simple Blueprint to create a cloud server"
+  version: 1.0.0
+  services:
+    lb:
+      component:
+        interface: http
+        type: load-balancer
+        constraints:
+        - algorithm: ROUND_ROBIN
+      relations:
+      - server: http
+      display-name: Load Balancer
+    "server":
+      constraints:
+      - setting: count
+        greater-than-or-equal-to: 1
+        less-than: 4
+      - count: 1
+      component:
+        type: compute
+        constraints:
+          - os: CoreOS (Stable)
+  options:
+    region:
+      type: string
+      default: IAD
+      constrains:
+        - resource_type: load-balancer
+          service: lb
+          setting: region
+        - resource_type: compute
+          service: "server"
+          setting: region
+environment:
+  id: rackspace-open-cloud
+  name: Rackspace Open Cloud
+  providers:
+    load-balancer: {}
+    nova: {}
+    common:
+      vendor: rackspace

@@ -22,7 +22,7 @@ blueprint:
       component:
         type: compute
         constraints:
-          - os: CoreOS (Stable)
+          - os: Windows Server 2012 R2
   options:
     region:
       type: string

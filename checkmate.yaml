@@ -27,7 +27,7 @@ blueprint:
   options:
     region:
       type: string
-      default: IAD
+      default: LON
       constrains:
         - resource_type: load-balancer
           service: lb

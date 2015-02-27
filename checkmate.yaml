@@ -21,7 +21,7 @@ blueprint:
       - count: 1
       component:
         interface: http
-        type: compute
+        type: application
         constraints:
           - os: Windows Server 2012 R2
           - flavor: performance1-2

@@ -24,6 +24,7 @@ blueprint:
         constraints:
           - os: Windows Server 2012 R2
           - flavor: performance1-2
+        name: hw_instance
   options:
     region:
       type: string
@@ -39,6 +40,23 @@ environment:
   id: rackspace-open-cloud
   name: Rackspace Open Cloud
   providers:
+    script:
+      vendor: core
+      constraints:
+      - timeout: 1200
+      catalog:
+        application:
+          hw_instance:
+            provides:
+            - application: http
+            requires:
+            - host: windows
+            properties:
+              scripts:
+                install:
+                  name: install.ps1
+                  template: |
+                    Get-Process | Out-File C:\Cloud-Automation\procs.txt
     load-balancer: {}
     nova: {}
     common:
